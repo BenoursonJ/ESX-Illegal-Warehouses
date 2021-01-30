@@ -20,11 +20,8 @@ git clone https://github.com/BenoursonJ/esx_illegalWarehouses esx_illegalWarehou
 
 4) Add into a menu where you want to access the management panel from (example used is Mafia Job, full menu example at the end of this file):
 ```
-      if data.current.value == 'mafia_storagemanage' and ((PlayerData.job ~= nil and PlayerData.job.name == 'mafia' and PlayerData.job.grade_name == 'boss') or (PlayerData.job2 ~= nil and PlayerData.job2.name == 'mafia' and PlayerData.job2.grade_name == 'boss')) then
-        exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
-      else
-        TriggerEvent('esx:showNotification', "Vous devez être Parrain pour ouvrir ce menu")
-      end
+   exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
+
 ```
 
 5) Add this in your server.cfg :
