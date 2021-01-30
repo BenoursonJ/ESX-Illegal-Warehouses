@@ -2,6 +2,19 @@
 
 Illegal warehouses that can be rented to gangs, illegal organizations or even certain jobs and that can be lockpicked by police forces as long as they have lockpicks.
 
+
+# [FEATURES]
+
+
+* **Warehouses management** from any menu via an export
+  * **View the current state of the warehouses** : Warehouse Name | Jobname rented to | Gang Name rented to
+  * **Rent** a warehouse
+  * **Reset** the warehouse ownership
+* **Private warehouses**: each warehouse can only be opened by the gang/org/job it has been rented to
+* **LSPD OPEN UP !!** : each warehouse can be raided by the LSPD as long as they have lockpicks. When raiding a warehouse, a notification will be sent alerting every player of the raid but you will have to guess which warehouse is being raided !
+* **Easily add or remove warehouses** : Just add or remove the Warehouses from Config.lua, add or remove the needed info in the database and you are done !
+* **Easily add or remove gangs, orgs, jobs** : Just add or remove the jobs in Config.lua
+
 # [REQUIREMENTS]
 
 
@@ -51,7 +64,7 @@ ensure esx_illegalWarehouses
 
 
 # [MENU EXAMPLE]
-```
+``` lua
 function OpenCloakroomMenu()
   local elements = {
     {label = _U('citizen_wear'), value = 'citizen_wear'},
