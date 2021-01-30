@@ -1,20 +1,23 @@
 ESX = nil
-Storage1stat, Storage2stat, Storage3stat, Storage4stat, Storage5stat, Storage6stat = false, false, false, false, false, false
+StorageStat = {}
 
+for k,v in pairs(Config.Zones) do
+	table.insert(StorageStat, {k, false})
+end
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 
 ESX.RegisterServerCallback('esx_illegalWarehouses:getStorageOwner', function(source, cb, storageName)
 	MySQL.Async.fetchAll('SELECT owner FROM illegal_warehouses WHERE warehouse = @id', { ['@id'] = storageName }, function(result)
-		cb(string.lower(result[1].owner))
+		cb(result[1].owner)
 	  end)
 end)
 
 RegisterServerEvent('esx_illegalWarehouses:getStockItem')
 AddEventHandler('esx_illegalWarehouses:getStockItem', function(itemName, count, storageZone)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	TriggerEvent('esx_addoninventory:getSharedInventory', storageZone, function(inventory)
+	TriggerEvent('esx_addoninventory:getSharedInventory', string.lower(storageZone), function(inventory)
 		local item = inventory.getItem(itemName)
 		if item.count >= count then
 			inventory.removeItem(itemName, count)
@@ -27,7 +30,7 @@ AddEventHandler('esx_illegalWarehouses:getStockItem', function(itemName, count, 
 end)
 
 ESX.RegisterServerCallback('esx_illegalWarehouses:getStockItems', function(source, cb, storageZone)
-	TriggerEvent('esx_addoninventory:getSharedInventory', storageZone, function(inventory)
+	TriggerEvent('esx_addoninventory:getSharedInventory', string.lower(storageZone), function(inventory)
 		cb(inventory.items)
 	end)
 end)
@@ -60,7 +63,7 @@ end)
 
 
 ESX.RegisterServerCallback('esx_illegalWarehouses:getWeapons', function(source, cb, storageZone)
-	TriggerEvent('esx_datastore:getSharedDataStore', storageZone, function(store)
+	TriggerEvent('esx_datastore:getSharedDataStore', string.lower(storageZone), function(store)
 		local weapons = store.get('weapons')
 		if weapons == nil then
 			weapons = {}
@@ -76,7 +79,7 @@ ESX.RegisterServerCallback('esx_illegalWarehouses:addWeapon', function(source, c
 	if removeWeapon then
 		xPlayer.removeWeapon(weaponName)
 	end
-	TriggerEvent('esx_datastore:getSharedDataStore', storageZone, function(store)
+	TriggerEvent('esx_datastore:getSharedDataStore', string.lower(storageZone), function(store)
 		local weapons = store.get('weapons')
 		if weapons == nil then
 			weapons = {}
@@ -103,7 +106,7 @@ end)
 ESX.RegisterServerCallback('esx_illegalWarehouses:removeWeapon', function(source, cb, weaponName, storageZone)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.addWeapon(weaponName, 200)
-	TriggerEvent('esx_datastore:getSharedDataStore', storageZone, function(store)
+	TriggerEvent('esx_datastore:getSharedDataStore', string.lower(storageZone), function(store)
 		local weapons = store.get('weapons')
 		if weapons == nil then
 			weapons = {}
@@ -137,7 +140,7 @@ ESX.RegisterServerCallback('esx_illegalWarehouses:getWarehouses', function (sour
 			table.insert(customers, {
 				label = result[i].label,
 				warehouse = result[i].warehouse,
-				owner = result[i].owner
+				owner = result[i].ownerDisplayName
 			})
 		end
 		cb(customers)
@@ -146,50 +149,35 @@ end)
 
 RegisterServerEvent('esx_illegalWarehouses:revoke')
 AddEventHandler('esx_illegalWarehouses:revoke', function(storageZone)
-	MySQL.Async.execute('UPDATE illegal_warehouses set owner = "" WHERE warehouse = @livretID', {['@livretID'] = storageZone},	function ()	end)
+	MySQL.Async.execute('UPDATE illegal_warehouses set owner = "", ownerDisplayName = "" WHERE warehouse = @livretID', {['@livretID'] = storageZone},	function ()	end)
 end)
 
 RegisterServerEvent('esx_illegalWarehouses:rent')
 AddEventHandler('esx_illegalWarehouses:rent', function(storageZone, gangname)
-	if gangname == 'mafia' then gangname = 'Mafia' end
-	if gangname == 'vagos' then gangname = 'Vagos' end
-	if gangname == 'ballas' then gangname = 'Ballas' end
-	if gangname == 'families' then gangname = 'Families' end
-	if gangname == 'biker' then gangname = 'Biker' end
-	MySQL.Async.execute('UPDATE illegal_warehouses set owner = @gangname WHERE warehouse = @ID', {['@ID'] = storageZone, ['@gangname'] = gangname},	function ()	end)
+	local gangDisplayName
+	for k, v in pairs(Config.Gangs) do
+		if k == gangname then
+			gangDisplayName = v.Name
+		end
+	end
+	MySQL.Async.execute('UPDATE illegal_warehouses set owner = @gangname, ownerDisplayName = @Disp WHERE warehouse = @ID', {['@ID'] = storageZone, ['@gangname'] = gangname, ['@Disp'] = gangDisplayName},	function ()	end)
 end)
 
 ESX.RegisterServerCallback('esx_illegalWarehouses:GetWareHouseStatus', function(source, cb, storageName)
-	if storageName == "Storage1" then
-		cb(Storage1stat)
-	elseif storageName == "Storage2" then
-		cb(Storage2stat)
-	elseif storageName == "Storage3" then
-		cb(Storage3stat)
-	elseif storageName == "Storage4" then
-		cb(Storage4stat)
-	elseif storageName == "Storage5" then
-		cb(Storage5stat)
-	elseif storageName == "Storage6" then
-		cb(Storage6stat)
+	for k,v in pairs(StorageStat) do
+	   if v[1] == storageName then
+		cb(v[2])
+	   end
 	end
 end)
 
 RegisterServerEvent('esx_illegalWarehouses:UpdateWarehouseStatus')
 AddEventHandler('esx_illegalWarehouses:UpdateWarehouseStatus', function(storageZone)
-	if storageZone == "Storage1" then
-		Storage1stat = not Storage1stat
-	elseif storageZone == "Storage2" then
-		Storage2stat = not Storage2stat
-	elseif storageZone == "Storage3" then
-		Storage3stat = not Storage3stat
-	elseif storageZone == "Storage4" then
-		Storage4stat = not Storage4stat
-	elseif storageZone == "Storage5" then
-		Storage5stat = not Storage5stat
-	elseif storageZone == "Storage6" then
-		Storage6stat = not Storage6stat
-	end
+	for k,v in pairs(StorageStat) do
+		if v[1] == storageZone then
+			StorageStat[k][2] = not v[2]
+		end
+	 end
 end)
 
 RegisterServerEvent('esx_illegalWarehouses:AlertPlayersPoliceBreakIn')
@@ -197,6 +185,14 @@ AddEventHandler('esx_illegalWarehouses:AlertPlayersPoliceBreakIn', function()
 	local xPlayers	= ESX.GetPlayers()
 	for i=1, #xPlayers, 1 do
 		local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-		TriggerClientEvent('esx:showAdvancedNotification', xPlayers[i], 'LSPD', '~b~Alerte LSPD', 'Le LSPD est en train de forcer un entrepôt!', 'CHAR_PLANESITE', 0)
+		TriggerClientEvent('esx:showAdvancedNotification', xPlayers[i], 'LSPD', '~b~Alerte LSPD', _U('lspd_enforcing'), 'CHAR_PLANESITE', 0)
 	end
 end)
+
+
+RegisterServerEvent('esx_illegalWarehouses:RemoveInventoryItem')
+AddEventHandler('esx_illegalWarehouses:RemoveInventoryItem', function(item)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.removeInventoryItem(item, 1)
+end)
+

@@ -120,7 +120,7 @@ Citizen.CreateThread(function()
 					ESX.TriggerServerCallback('esx_illegalWarehouses:getStorageOwner', function(storageOwner)
 						if (PlayerData.job ~= nil and PlayerData.job.name == storageOwner) or (PlayerData.job2 ~= nil and PlayerData.job2.name == storageOwner) then
 							OpenStorageMenu(CurrentActionData.zone)
-						elseif PlayerData.job.name == 'police' then
+						elseif PlayerData.job.name == Config.Policejob and PlayerData.job2.name ~= storageOwner then
 							PoliceOpenWarehouse(CurrentActionData.zone)
 						else
 							ESX.ShowNotification(_U('unauthorized_container_access'))
@@ -222,12 +222,11 @@ end
 
 
 function OpenGetStocksMenu(storageZone)
-	local storeZone = string.lower(storageZone)
 	ESX.TriggerServerCallback('esx_illegalWarehouses:getStockItems', function(items)
 		local elements = {}
 		for i=1, #items, 1 do
 			if (items[i].count ~= 0) then
-				table.insert(elements, {label = 'x' .. items[i].count .. ' ' .. items[i].label, value = items[i].name, storagename = storeZone, itemcount = items[i].count})
+				table.insert(elements, {label = 'x' .. items[i].count .. ' ' .. items[i].label, value = items[i].name, storagename = storageZone, itemcount = items[i].count})
 			end
 		end
 		ESX.UI.Menu.Open(
@@ -264,12 +263,11 @@ function OpenGetStocksMenu(storageZone)
 		function(data, menu)
 			menu.close()
 		end)
-	end, storeZone)
+	end, storageZone)
 end
 
 
 function OpenGetWeaponMenu(storageZone)
-	local store = string.lower(storageZone)
 	ESX.TriggerServerCallback('esx_illegalWarehouses:getWeapons', function(weapons)
 		local elements = {}
 		for i=1, #weapons, 1 do
@@ -277,7 +275,7 @@ function OpenGetWeaponMenu(storageZone)
 				table.insert(elements, {
 					label = 'x' .. weapons[i].count .. ' ' .. ESX.GetWeaponLabel(weapons[i].name),
 					value = weapons[i].name,
-					storagename = store
+					storagename = storageZone
 				})
 			end
 		end
@@ -293,7 +291,7 @@ function OpenGetWeaponMenu(storageZone)
 		end, function(data, menu)
 			menu.close()
 		end)
-	end, store)
+	end, storageZone)
 end
 
 function OpenPutWeaponMenu(storageZone)
@@ -306,7 +304,7 @@ function OpenPutWeaponMenu(storageZone)
 			table.insert(elements, {
 				label = weaponList[i].label,
 				value = weaponList[i].name,
-				storagename = string.lower(storageZone)
+				storagename = storageZone
 			})
 		end
 	end
@@ -343,15 +341,15 @@ exports("OpenWarehousesMenu", function()
 		end
 		ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'customers', elements, function(data, menu)
 			if data.value == 'revoke' then
+				menu.close()
 				TriggerServerEvent('esx_illegalWarehouses:revoke', data.data.warehouse)
 				ESX.ShowNotification(data.data.label .. _U('successfully_revoked'))
-				menu.close()
 				Citizen.Wait(100)
 				exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
 			end
 			if data.value == 'rent' then
 				menu.close()
-				ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'gang_name',
+				ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'billing',
 					{
 						title = _U('gang_name_title')
 					},
@@ -359,7 +357,7 @@ exports("OpenWarehousesMenu", function()
 						local gangname = string.lower(data2.value)
 						if gangname == nil then
 							ESX.ShowNotification(_U('please_enter_gangname'))
-						elseif gangname ~= "mafia" and gangname ~= "ballas" and gangname ~= "vagos" and gangname ~= "families" and gangname ~= "biker" then
+						elseif not has_value(Config.Gangs, gangname) then
 							ESX.ShowNotification(_U('please_enter_valid_gangname'))
 						else
 							menu2.close()
@@ -370,7 +368,7 @@ exports("OpenWarehousesMenu", function()
 						end
 					end,
 					function(data2, menu2)
-					menu.close()
+					menu2.close()
 					end)
 				end
 		end, 
@@ -382,7 +380,7 @@ end)
 
 function PoliceOpenWarehouse(zone)
 	local bool = false
-	ESX.TriggerServerCallback('esx_policejob:getPlayerInventory', function(inventory)
+	ESX.TriggerServerCallback('esx_illegalWarehouses:getPlayerInventory', function(inventory)
 		for i=1, #inventory.items, 1 do
 			if inventory.items[i].count > 0 and inventory.items[i].name == "lockpick" then
 				bool = true
@@ -394,6 +392,7 @@ function PoliceOpenWarehouse(zone)
 					OpenStorageMenu(zone)
 				else
 					TriggerServerEvent('esx_illegalWarehouses:AlertPlayersPoliceBreakIn')
+					TriggerServerEvent('esx_illegalWarehouses:RemoveInventoryItem', "lockpick")
 					ESX.ShowNotification(_U('police_open_container_notify'))
 					Citizen.Wait(5000)
 					cond = math.random(0, 100)
@@ -410,4 +409,13 @@ function PoliceOpenWarehouse(zone)
 			ESX.ShowNotification(_U('no_lockpick'))
 		end
 	end)
+end
+
+function has_value (tab, val)
+	for k, v in pairs(tab) do
+		if k == val then
+			return true
+		end
+	end
+	return false
 end

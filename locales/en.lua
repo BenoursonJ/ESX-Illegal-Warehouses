@@ -30,4 +30,6 @@ Locales['en'] = {
 	['have_withdrawn'] = 'You have taken ',
 	['added'] = 'You have deposited ',
 	['no_lockpick'] = "You do not have any lockpicks on you !",
+	['lspd_enforcing'] = 'The Los Santos PD is raiding a Warehouse !'
+
 }

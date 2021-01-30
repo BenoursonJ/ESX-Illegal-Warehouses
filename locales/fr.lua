@@ -30,4 +30,5 @@ Locales['fr'] = {
 	['have_withdrawn'] = 'Vous avez retiré ',
 	['added'] = 'Vous avez déposé ',
 	['no_lockpick'] = "Vous n'avez pas d'outils de crochetage sur vous !",
+	['lspd_enforcing'] = 'Le LSPD est en train de forcer un entrepôt!'
 }

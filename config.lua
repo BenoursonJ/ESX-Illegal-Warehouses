@@ -2,6 +2,7 @@ Config                            = {}
 Config.DrawDistance               = 20.0
 Config.Locale                     = 'fr'
 Config.PoliceCond				  = 75
+Config.Policejob				  = 'police'
 
 Config.Zones = {
 	Storage1 = {
@@ -46,6 +47,24 @@ Config.Zones = {
 		Color = {r = 136, g = 243, b = 216},
 		Name  = "Entrepôt 6",
 		Type  = 1
+	}
+}
+
+Config.Gangs = {
+	ballas = {
+		Name = "Ballas"
+	},
+	biker = {
+		Name = "Bikers"
+	},
+	families = {
+		Name = "Families"
+	},
+	mafia = {
+		Name = "La Grande Table"
+	},
+	vagos = {
+		Name = "Vagos"
 	}
 }
 
