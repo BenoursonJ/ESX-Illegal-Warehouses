@@ -20,8 +20,7 @@ git clone https://github.com/BenoursonJ/esx_illegalWarehouses esx_illegalWarehou
 
 4) Add into a menu where you want to access the management panel from (example used is Mafia Job, full menu example at the end of this file):
 ```
-   exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
-
+exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
 ```
 
 5) Add this in your server.cfg :
@@ -36,7 +35,6 @@ ensure esx_illegalWarehouses
 function OpenCloakroomMenu()
   local elements = {
     {label = _U('citizen_wear'), value = 'citizen_wear'},
-    {label = _U('mafia_wear'), value = 'mafia_wear'},
     {label = "Gestion Entrepôts", value = 'mafia_storagemanage'},
   }
   ESX.UI.Menu.CloseAll()
