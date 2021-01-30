@@ -3,7 +3,7 @@
 Illegal warehouses that can be rented to gangs, illegal organizations or even certain jobs and that can be lockpicked by police forces as long as they have lockpicks.
 
 
-# [FEATURES]
+## [FEATURES]
 
 
 * **Warehouses management** from any menu via an export
@@ -15,16 +15,16 @@ Illegal warehouses that can be rented to gangs, illegal organizations or even ce
 * **Easily add or remove warehouses** : Just add or remove the Warehouses from Config.lua, add or remove the needed info in the database and you are done !
 * **Easily add or remove gangs, orgs, jobs** : Just add or remove the jobs in Config.lua
 
-# [REQUIREMENTS]
+## [REQUIREMENTS]
 
 
-* es_extended
+* es_extended (v1 OR v2)
   * es_extended v1 : https://github.com/esx-framework/es_extended/tree/v1-final
   * es_extended v2 : https://github.com/esx-framework/es_extended
 * async          : https://github.com/esx-framework/async
 * mysql-async    : https://github.com/brouznouf/fivem-mysql-async
 
-# [INSTALLATION]
+## [INSTALLATION]
 
 1) CD in your resources/[folderWhereYouWantTheScriptToBe]
 2) Clone the repository
@@ -44,7 +44,7 @@ exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
 ensure esx_illegalWarehouses
 ```
 
-# [CONFIG.LUA EXPLAINED]
+## [CONFIG.LUA EXPLAINED]
 * **Config.DrawDistance** | Maximum distance from which the markers can be seen
 * **Config.Locale** | Text language (currently supported: fr and en)
 * **Config.PoliceCond** | Percentage of failure (default: 75%)
@@ -63,7 +63,7 @@ ensure esx_illegalWarehouses
     * **Name** | Display named that is used when a warehouse is rented. When opening the warehouses menu, you will see this variable and not the gangname
 
 
-# [MENU EXAMPLE]
+## [MENU EXAMPLE]
 ``` lua
 function OpenCloakroomMenu()
   local elements = {
@@ -117,3 +117,15 @@ function OpenCloakroomMenu()
     end)
 end
 ```
+
+# Legal
+### License
+esx_illegalWarehouses - Fivem script for es_extended. Enables the creation of warehouses that can be assigned to gangs/illegal organisations.
+
+Copyright (C) 2021 Benourson#9496
+
+This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
+
+This program Is distributed In the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty Of MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License For more details.
+
+You should have received a copy Of the GNU General Public License along with this program. If Not, see http://www.gnu.org/licenses/.
