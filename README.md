@@ -1,8 +1,8 @@
 # esx_illegalWarehouses
 
-ESX Illegal Warehouses
+Illegal warehouses that can be rented to gangs, illegal organizations or even certain jobs and that can be lockpicked by police forces as long as they have lockpicks.
 
-[REQUIREMENTS]
+# [REQUIREMENTS]
 
 
 * es_extended
@@ -11,7 +11,7 @@ ESX Illegal Warehouses
   * async          : https://github.com/esx-framework/async
   * mysql-async    : https://github.com/brouznouf/fivem-mysql-async
 
-[INSTALLATION]
+# [INSTALLATION]
 
 1) CD in your resources/[folderWhereYouWantTheScriptToBe]
 2) Clone the repository
@@ -32,7 +32,7 @@ ensure esx_illegalWarehouses
 ```
 
 
-[MENU EXAMPLE]
+# [MENU EXAMPLE]
 ```
 function OpenCloakroomMenu()
   local elements = {
