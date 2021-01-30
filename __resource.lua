@@ -11,15 +11,11 @@ client_scripts {
 }
 
 server_scripts {
-	'@async/async.lua',
-	'@mysql-async/lib/MySQL.lua',
+  '@async/async.lua',
+  '@mysql-async/lib/MySQL.lua',
   '@es_extended/locale.lua',
   'locales/en.lua',
   'locales/fr.lua',
   'config.lua',
   'server/main.lua'
-}
-
-exports {
-	'OpenWarehousesMenu'
 }
