@@ -28,7 +28,7 @@ Illegal warehouses that can be rented to gangs, illegal organizations or even ce
 
 1) CD in your resources/[folderWhereYouWantTheScriptToBe]
 2) Clone the repository
-```
+``` git
 git clone https://github.com/BenoursonJ/esx_illegalWarehouses esx_illegalWarehouses
 ```
 3) * Warehouses and Inventories : Import illegalWarehouses_en.sql or illegalWarehouses_fr.sql according to your language in your database
@@ -59,7 +59,7 @@ ensure esx_illegalWarehouses
     * **Type** | Marker Type (0 = hidden | 1 = displayed)
 
 * **Config.Gangs** | List of gangs, organizations or jobs that can use the illegal warehouses system
-  * G**angname (ex: ballas)** | Gang name, must be the same as the one used to set a job (ex: /setjob 1 ballas 3)
+  * **Gangname (ex: ballas)** | Gang name, must be the same as the one used to set a job (ex: /setjob 1 ballas 3)
     * **Name** | Display named that is used when a warehouse is rented. When opening the warehouses menu, you will see this variable and not the gangname
 
 
