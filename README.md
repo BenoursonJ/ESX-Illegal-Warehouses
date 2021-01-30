@@ -8,6 +8,8 @@ ESX Illegal Warehouses
 * es_extended
   * es_extended v1 : https://github.com/esx-framework/es_extended/tree/v1-final
   * es_extended v2 : https://github.com/esx-framework/es_extended
+  * async          : https://github.com/esx-framework/async
+  * mysql-async    : https://github.com/brouznouf/fivem-mysql-async
 
 [INSTALLATION]
 
