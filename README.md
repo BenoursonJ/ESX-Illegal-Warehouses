@@ -32,22 +32,22 @@ ensure esx_illegalWarehouses
 ```
 
 # [CONFIG.LUA EXPLAINED]
-*Config.DrawDistance | Maximum distance from which the markers can be seen
-*Config.Locale | Text language (currently supported: fr and en)
-*Config.PoliceCond | Percentage of failure (default: 75%)
-*Config.Policejob	| Name of the job that is able to lockpick warehouses
+* Config.DrawDistance | Maximum distance from which the markers can be seen
+* Config.Locale | Text language (currently supported: fr and en)
+* Config.PoliceCond | Percentage of failure (default: 75%)
+* Config.Policejob	| Name of the job that is able to lockpick warehouses
 
-*Config.Zones | Array listing the warehouses, structure is as follow :
-  *StorageName (ex: Storage1) | Marker name, must be the same than as defined in the DB
-    *Position | Marker position
-    *Marker Size | Marker size
-    *Marker Color | Marker colour
-    *Display Name | Marker Display Name
-    *Type | Marker Type (0 = hidden | 1 = displayed)
+* Config.Zones | Array listing the warehouses, structure is as follow :
+  * StorageName (ex: Storage1) | Marker name, must be the same than as defined in the DB
+    * Position | Marker position
+    * Marker Size | Marker size
+    * Marker Color | Marker colour
+    * Display Name | Marker Display Name
+    * Type | Marker Type (0 = hidden | 1 = displayed)
 
-*Config.Gangs | List of gangs, organizations or jobs that can use the illegal warehouses system
-  *Gangname (ex: ballas) | Gang name, must be the same as the one used to set a job (ex: /setjob 1 ballas 3)
-    *Name | Display named that is used when a warehouse is rented. When opening the warehouses menu, you will see this variable and not the gangname
+* Config.Gangs | List of gangs, organizations or jobs that can use the illegal warehouses system
+  * Gangname (ex: ballas) | Gang name, must be the same as the one used to set a job (ex: /setjob 1 ballas 3)
+    * Name | Display named that is used when a warehouse is rented. When opening the warehouses menu, you will see this variable and not the gangname
 
 
 # [MENU EXAMPLE]
