@@ -2,6 +2,7 @@
 
 Illegal warehouses that can be rented to gangs, illegal organizations or even certain jobs and that can be lockpicked by police forces as long as they have lockpicks.
 
+***
 
 ## [FEATURES]
 
@@ -15,6 +16,8 @@ Illegal warehouses that can be rented to gangs, illegal organizations or even ce
 * **Easily add or remove warehouses** : Just add or remove the Warehouses from Config.lua, add or remove the needed info in the database and you are done !
 * **Easily add or remove gangs, orgs, jobs** : Just add or remove the jobs in Config.lua
 
+***
+
 ## [REQUIREMENTS]
 
 
@@ -23,6 +26,8 @@ Illegal warehouses that can be rented to gangs, illegal organizations or even ce
   * es_extended v2 : https://github.com/esx-framework/es_extended
 * async          : https://github.com/esx-framework/async
 * mysql-async    : https://github.com/brouznouf/fivem-mysql-async
+
+***
 
 ## [INSTALLATION]
 
@@ -44,6 +49,8 @@ exports["esx_illegalWarehouses"]:OpenWarehousesMenu()
 ensure esx_illegalWarehouses
 ```
 
+***
+
 ## [CONFIG.LUA EXPLAINED]
 * **Config.DrawDistance** | Maximum distance from which the markers can be seen
 * **Config.Locale** | Text language (currently supported: fr and en)
@@ -62,6 +69,14 @@ ensure esx_illegalWarehouses
   * **Gangname (ex: ballas)** | Gang name, must be the same as the one used to set a job (ex: /setjob 1 ballas 3)
     * **Name** | Display named that is used when a warehouse is rented. When opening the warehouses menu, you will see this variable and not the gangname
 
+***
+
+## [TUTORIALS]
+
+In need of info and troubleshooting tips ?
+Head to the Wiki => [HERE](https://github.com/BenoursonJ/esx_illegalWarehouses/wiki)
+
+***
 
 ## [MENU EXAMPLE]
 ``` lua
@@ -117,6 +132,8 @@ function OpenCloakroomMenu()
     end)
 end
 ```
+
+***
 
 # Legal
 ### License
