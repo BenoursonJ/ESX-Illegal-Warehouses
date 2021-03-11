@@ -34,7 +34,7 @@ Illegal warehouses that can be rented to gangs, illegal organizations or even ce
 1) CD in your resources/[folderWhereYouWantTheScriptToBe]
 2) Clone the repository
 ``` git
-git clone https://github.com/BenoursonJ/esx_illegalWarehouses esx_illegalWarehouses
+git clone https://github.com/BenoursonJ/ESX-Illegal-Warehouses esx_illegalWarehouses
 ```
 3) * Warehouses and Inventories : Import illegalWarehouses_en.sql or illegalWarehouses_fr.sql according to your language in your database
 
@@ -74,7 +74,7 @@ ensure esx_illegalWarehouses
 ## [TUTORIALS]
 
 In need of info and troubleshooting tips ?
-Head to the Wiki => [HERE](https://github.com/BenoursonJ/esx_illegalWarehouses/wiki)
+Head to the Wiki => [HERE](https://github.com/BenoursonJ/ESX-Illegal-Warehouses/wiki)
 
 ***
 
