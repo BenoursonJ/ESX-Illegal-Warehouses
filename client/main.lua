@@ -1,5 +1,6 @@
 -----------------------------------------
--- Created by Benourson#9496
+-- 
+d by Benourson#9496
 -----------------------------------------
 
 
@@ -83,13 +84,14 @@ end)
 -- Enter / Exit marker events
 Citizen.CreateThread(function()
 	while true do
-		Wait(0)
+		local wait = 1200
 		if PlayerData ~= nil  then
 			local coords      = GetEntityCoords(GetPlayerPed(-1))
 			local isInMarker  = false
 			local currentZone = nil
 			for k,v in pairs(Config.Zones) do
 				if(GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < v.Size.x) then
+					wait = 0
 					isInMarker  = true
 					currentZone = k
 				end
@@ -104,6 +106,7 @@ Citizen.CreateThread(function()
 				TriggerEvent('esx_illegalWarehouses:hasExitedMarker', LastZone)
 			end
 		end
+		Citizen.Wait(wait)
 	end
 end)
 
