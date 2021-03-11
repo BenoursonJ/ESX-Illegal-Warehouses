@@ -1,6 +1,8 @@
-# esx_illegalWarehouses
+# ESX Illegal Warehouses [esx_illegalWarehouses]
 
 Illegal warehouses that can be rented to gangs, illegal organizations or even certain jobs and that can be lockpicked by police forces as long as they have lockpicks.
+
+![ESX Illegal Warehouses](https://repository-images.githubusercontent.com/334149890/e1b1e180-825e-11eb-9af3-8090fa4ff811)
 
 ***
 
