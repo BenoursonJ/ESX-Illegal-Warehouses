@@ -65,20 +65,21 @@ AddEventHandler('esx_illegalWarehouses:hasExitedMarker', function(zone)
 	CurrentAction = nil
 end)
 
-
 -- Display markers
 Citizen.CreateThread(function()
 	while true do
-		Wait(0)
+ 		local wait = 1200
 		local coords = GetEntityCoords(GetPlayerPed(-1))
 
 		for k,v in pairs(Config.Zones) do
 			if PlayerData ~= nil  then
 				if(v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance) then
+					wait = 0
 					DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, false, false, false)
 				end
 			end
 		end
+		Citizen.Wait(wait)
 	end
 end)
 -- Enter / Exit marker events
@@ -97,11 +98,13 @@ Citizen.CreateThread(function()
 				end
 			end
 			if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
+				wait = 0
 				HasAlreadyEnteredMarker = true
 				LastZone                = currentZone
 				TriggerEvent('esx_illegalWarehouses:hasEnteredMarker', currentZone)
 			end
 			if not isInMarker and HasAlreadyEnteredMarker then
+			 	wait = 0
 				HasAlreadyEnteredMarker = false
 				TriggerEvent('esx_illegalWarehouses:hasExitedMarker', LastZone)
 			end
