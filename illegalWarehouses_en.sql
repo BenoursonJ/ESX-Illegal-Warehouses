@@ -6,14 +6,14 @@ CREATE TABLE IF NOT EXISTS illegal_warehouses
     ownerDisplayName VARCHAR(200) NOT NULL
 );
 
-INSERT INTO illegal_warehouses (warehouse, label)
- VALUES
- ('Storage1', 'Warehouse 1'),
- ('Storage2', 'Warehouse 2'),
- ('Storage3', 'Warehouse 3'),
- ('Storage4', 'Warehouse 4'),
- ('Storage5', 'Warehouse 5'),
- ('Storage6', 'Warehouse 6');
+INSERT INTO illegal_warehouses
+VALUES
+('Storage1', 'Warehouse 1', ' ', ' '),
+('Storage2', 'Warehouse 2', ' ', ' '),
+('Storage3', 'Warehouse 3', ' ', ' '),
+('Storage4', 'Warehouse 4', ' ', ' '),
+('Storage5', 'Warehouse 5', ' ', ' '),
+('Storage6', 'Warehouse 6', ' ', ' ');
 
 INSERT INTO addon_inventory (name, label, shared)
  VALUES
